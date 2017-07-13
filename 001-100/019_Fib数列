@@ -1,0 +1,14 @@
+题目：定义Fibonacci 数列如下：
+/ 0 n=0
+f(n)= 1 n=1
+\ f(n-1)+f(n-2) n=2
+输入n，用最快的方法求该数列的第n 项
+leetcode 070
+
+Answer:
+
+public int fib(int n) {
+    double sqrtNum = Math.sqrt(5);
+    return (int)(((Math.pow(1 + sqrtNum) / 2, n + 1 - 
+                 Math.pow(1 - sqrtNum) / 2, n + 1)) / sqrtNum);
+}
