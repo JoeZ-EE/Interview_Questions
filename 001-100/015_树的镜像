@@ -1,0 +1,40 @@
+题目：输入一颗二元查找树，将该树转换为它的镜像，
+即在转换后的二元查找树中，左子树的结点都大于右子树的结点。
+用递归和循环两种方法完成树的镜像转换。
+leetcode 226
+
+
+Answer：
+
+public class Solution {
+
+    // 递归 DFS
+    public TreeNode invertTree(TreeNode root) {
+        if (root == null) return null;
+        TreeNode left = root.left;
+        TreeNode right = root.right;
+        root.left = invertTree(right);
+        root.right = invertTree(left)；
+        return root;
+    }
+
+    // BFS
+    public TreeNode invertTree2(TreeNode root) {
+        if (root == null) return null;
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.offer(root);
+
+        while (!queue.isEmpty()) {
+            TreeNode node = queue.poll();
+            TreeNode left = node.left;
+            node.left = node.right;
+            node.right = left;
+
+            if (node.left != null)
+                queue.offer(node.left);
+            if (node.right != null)
+                queue.offer(node.right);
+        }
+        return root;
+    }
+}
