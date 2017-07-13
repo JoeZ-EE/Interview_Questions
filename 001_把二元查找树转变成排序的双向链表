@@ -1,0 +1,63 @@
+题目：
+输入一棵二元查找树，将该二元查找树转换成一个排序的双向链表。
+要求不能创建任何新的结点，只调整指针的指向。
+    10
+   / \
+  6  14
+ / \ / \
+4  8 12 16
+转换成双向链表
+4=6=8=10=12=14=16。
+
+Answer:
+
+public class Solution {
+    public TreeNode treeToLinkedList(TreeNode root) {
+        TreeNode head, tail;
+        helper(head, tail, root);
+        return head;
+    }
+
+    private void helper(TreeNode head, TreeNode tail, TreeNode root) {
+        TreeNode leftTail, rightHead;
+        
+        if (root == null) {
+            head = null;
+            tail = null;
+            return;
+        }
+
+        helper(head, leftTail, root.left);
+        helper(rightHead, tail, root.right);
+
+        if (leftTail != null) {
+            leftTail.right = root;
+            root.left = leftTail;
+        } else 
+            head = root;
+
+        if (rightHead != null) {
+            root.right = rightHead;
+            rightHead.left = root;
+        } else 
+            tail = root;
+    }
+}
+
+class TreeNode {
+    TreeNode left;
+    TreeNode right;
+    int val;
+
+    public TreeNode() {
+        left = null;
+        right = null;
+        val = 0;
+    }
+
+    public TreeNode(int val) {
+        this.val = val;
+        left = null;
+        right = null;
+    }
+}
