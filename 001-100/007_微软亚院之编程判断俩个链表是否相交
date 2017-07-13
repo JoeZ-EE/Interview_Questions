@@ -3,8 +3,7 @@
 问题扩展：
 1.如果链表可能有环列?
 2.如果需要求出俩个链表相交的第一个节点列?
-leetcode 160
-
+leetcode 160 141 142
 Answer:
 public class Solution {
     public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
@@ -17,5 +16,40 @@ public class Solution {
             b = b == null ? headA : b.next;
         }
         return a;                                                      
+    }
+
+    // 扩展：有环
+    public boolean hasCycle(ListNode head) {
+        if (head == null) return false;
+        ListNode walker = head;
+        ListNode runner = head;
+
+        while (runner.next != null && runner.next.next != null) {
+            walker = walker.next;
+            runner = runner.next.next;
+            if (walker == runner) return true;
+        }
+        return false;
+    }
+
+    // 扩展：找环点
+    public ListNode detectCycle(ListNode head) {
+        if (head == null) return null;
+        ListNode walker = head;
+        ListNode runner = head;
+        while (runner.next != null && runner.next.next != null) {
+            walker = walker.next;
+            runner = runner.next.next;
+            if (walker == runner) break;
+        }
+
+        if (runner.next == null || runner.next.next == null)
+            return null;
+        ListNode walker2 = head;
+        while (walker2 != walker) {
+            walker = walker.next;
+            walker2 = walker2.next;
+        }
+        return walker2;
     }
 }
