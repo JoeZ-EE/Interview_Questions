@@ -1,0 +1,66 @@
+题目：输入n 个整数，输出其中最小的k 个。
+例如输入1，2，3，4，5，6，7 和8 这8 个数字，则最小的4 个数字为1，2，3 和4。
+leetcode 215
+
+Answer:
+public class Solution {
+    
+    private int parent(int i) {
+        return (i - 1) / 2;
+    }
+
+    private int leftChild(int i) {
+        return i * 2 + 1;
+    }
+
+    private int rightChild(int i) {
+        return i * 2 + 2;
+    }
+
+    private void swap(int[] nums, int i, int j) {
+        int temp = nums[i];
+        nums[i] = nums[j];
+        nums[j] = temp;
+    }
+
+    private void MaxHeap(int[] nums, int len, int i) {
+        int lChild = leftChild(i);
+        int rChild = rightChild(i);
+
+        int maxPos = i;
+        if (lChild < len && nums[lChild] > nums[maxPos])
+            maxPos = lChild;
+        if (rChild < len && nums[rChild] > nums[maxPos])
+            maxPos = rChild;
+
+        if (maxPos != i) {
+            swap(nums, maxPos, i);
+            MaxHeap(nums, len, maxPos);
+        } 
+    }
+
+    private void buildMaxHeap(int[] nums, int len) {
+        for (int i = parent(len - 1); i >= 0; i--) {
+            MaxHeap(nums, len, i);
+        }
+    }
+
+    public int[] findKthSmallest(int[] nums, int k) {
+        if (nums == null || nums.length < k || k <= 0)
+            return -1;
+        int[] maxHeap = new int[k];
+        for (int i = 0; i < k; i++) {
+            maxHeap[i] = nums[i];
+        }
+
+        buildMaxHeap(maxHeap, k);
+
+        for (int i = k; i < nums.length; i++) {
+            if (maxHeap[0] > nums[i]) {
+                maxHeap[0] = nums[i];
+                maxHeap(maxHeap, k, 0);
+            }
+        }
+        return maxHeap;
+    }
+}
