@@ -1,0 +1,33 @@
+题目：输入一个整数和一棵二元树。
+从树的根结点开始往下访问一直到叶结点所经过的所有结点形成一条路径。
+打印出和与输入整数相等的所有路径。
+例如输入整数22 和如下二元树
+  10
+  / \
+  5 12
+ / \
+4   7
+则打印出两条路径：10, 12 和10, 5, 7。
+leetcode 113
+
+Answer:
+
+public class Solution {
+    public List<List<Integer>> pathSum(TreeNode root, int sum) {
+        List<List<Integer>> res = new LinkedList<>();
+        pathSum(root, sum, currRes, res);
+        return res;
+    }
+
+    private void pathSum(TreeNode root, int sum, List<Integer> currRes, List<List<Integer>> res) {
+        if (root == null) return;
+        currRes.add(root.val);
+        if (root.left == null && root.right == null && sum == root.val)
+            res.add(new LinkedList<>(currRes));
+        else {
+            pathSum(root.left, sum - root.val, currRes, res);
+            pathSum(root.right, sum - root.val, currRes, res);
+        }
+        currRes.remove(currRes.size() - 1);
+    }
+}
