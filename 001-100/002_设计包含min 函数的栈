@@ -1,0 +1,32 @@
+定义栈的数据结构，要求添加一个min 函数，能够得到栈的最小元素。
+要求函数min、push 以及pop 的时间复杂度都是O(1)。
+leetcode 155
+
+
+Answer:
+public class MinStack {
+    private int min = Integer.MAX_VALUE;
+    private Stack<Integer> stack = new Stack<>();
+
+    public void push(int x) {
+        if (x <= min) {
+            stack.push(min);
+            min = x;
+        }
+        stack.push(x);
+    }
+
+    public void pop() {
+        if (stack.pop() == min) {
+            min = stack.pop();
+        }
+    }
+
+    public int top() {
+        return stack.peek();
+    }
+
+    public int getMin() {
+        return min;                                                                                          
+    }
+}
