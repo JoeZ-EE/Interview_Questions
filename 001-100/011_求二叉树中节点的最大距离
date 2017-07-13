@@ -1,0 +1,35 @@
+如果我们把二叉树看成一个图，父子节点之间的连线看成是双向的，
+我们姑且定义"距离"为两节点之间边的个数。
+写一个程序，
+求一棵二叉树中相距最远的两个节点之间的距离。
+
+Answer:
+public class Solution {
+    private int maxDepth;
+    public int maxDistance(TreeNode root) {
+        if (root == null) return 0;
+        else if (root.left == null && root.right == null)
+            return 0;
+        
+        int dis = max(height(root.left) + height(root.right), 
+                      maxDistance(root.left),
+                      maxDistance(root.right));
+        if (maxDepth < dis)
+            maxDepth = dis;
+        return dis;
+    }
+
+    private int height(TreeNode root) {
+        if (root == null)
+            return 0;
+        else 
+            return height(root.left) > height(root.right) ?
+                   height(root.left) + 1 :
+                   height(root.right) + 1;
+    }
+
+    private int max(int a, int b, int c) {
+        int temp = a > b ? a : b;
+        return temp > c ? temp : c;
+    }
+}
