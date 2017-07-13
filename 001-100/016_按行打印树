@@ -1,0 +1,59 @@
+题目（微软）：
+输入一颗二元树，从上往下按层打印树的每个结点，同一层中按照从左往右的顺序打印。
+例如输入
+8
+/ \
+6 10
+/ \ / \
+5 7 9 11
+输出8 6 10 5 7 9 11。
+leetcode 102
+
+
+Answer:
+public class Solution {
+
+    // method 1
+    public List<List<Integer>> levelOrder(TreeNode root) {
+         List<List<Integer>> res = new ArrayList<>();
+         creatLevelLinkedList(root, res, 0);
+         return res;
+    }
+
+    private void creatLevelLinkedList(TreeNode root, List<List<Integer>> res, int level) {
+        if (root == null) return;
+        List<Integer> list = null;
+        if (res.size() == level) {
+            list = new LinkedList<>();
+            res.add(list);
+        } else {
+            list = res.get(level);
+        }
+        list.add(root.val);
+        creatLevelLinkedList(root.left, res, level + 1);
+        creatLevelLinkedList(root.right, res, level + 1);
+    }
+
+    // method 2
+    public List<List<Integer>> levelOrder(TreeNode root) {
+        Queue<TreeNode> queue = new LinkedList<>();
+        List<List<Integer>> res = new LinkedList<>();
+        if (root == null) return res;
+
+        queue.offer(root);
+        while (!queue.isEmpty()) {
+            int levelNum = queue.size();
+            List<Integer> subList = new LinkedList<>():
+            for (int i = 0; i < levelNum; i++) {
+                if (queue.peek().left != null) 
+                    queue.offer(queue.peek().left);
+                if (queue.peek().right != null)
+                    queue.offer(queue.peek().right);
+                subList.add(queue.poll().val);
+            }
+            res.add(subList);
+        }
+        return res;
+    }
+}
+
