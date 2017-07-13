@@ -1,0 +1,21 @@
+给出俩个单向链表的头指针，比如h1，h2，判断这俩个链表是否相交。
+为了简化问题，我们假设俩个链表均不带环。
+问题扩展：
+1.如果链表可能有环列?
+2.如果需要求出俩个链表相交的第一个节点列?
+leetcode 160
+
+Answer:
+public class Solution {
+    public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
+        if (headA == null || headB == null) return null;
+        ListNode a = headA;
+        ListNode b = headB;
+
+        while (a != b) {
+            a = a == null ? headB : a.next;
+            b = b == null ? headA : b.next;
+        }
+        return a;                                                      
+    }
+}
