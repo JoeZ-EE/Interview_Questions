@@ -1,0 +1,23 @@
+题目：输入一个已经按升序排序过的数组和一个数字，
+在数组中查找两个数，使得它们的和正好是输入的那个数字。
+要求时间复杂度是O(n)。如果有多对数字的和等于输入的数字，输出任意一对即可。
+例如输入数组1、2、4、7、11、15 和数字15。由于4+11=15，因此输出4 和11。
+ANSWER:
+Use two cursors. One at front and the other at the end. Keep track of the sum by moving the cursors.
+leetcode 001
+
+Answer:
+
+public int[] twoSum(int[] nums, int target) {
+    int[] res = new int[2];
+    Map<Integer, Integer> map = new HashMap<>();
+    for (int i = 0; i < nums.length; i++) {
+        int another = target - nums[i];
+        if (map.containKey(another)) {
+            res[0] = map.get(another);;
+            res[1] = i;
+        }
+        map.put(nums[i], i);
+    }
+    return res;
+}
