@@ -12,3 +12,16 @@ public int fib(int n) {
     return (int)(((Math.pow(1 + sqrtNum) / 2, n + 1 - 
                  Math.pow(1 - sqrtNum) / 2, n + 1)) / sqrtNum);
 }
+
+// 剑指offer 009
+public long fib(int n) {
+    long yesterday = 0;
+    long today = 1;
+    long tomorrow = 0;
+    for (int i = 2; i <= n; i++) {
+        tomorrow = yesterday + today;
+        yesterday = today;
+        today = tomorrow;
+    }
+    return today;
+}
