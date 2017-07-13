@@ -1,0 +1,35 @@
+2010 年中兴面试题
+编程求解：
+输入两个整数n 和m，从数列1，2，3.......n 中随意取几个数,
+使其和等于m ,要求将其中所有的可能组合列出来
+
+// Answer:
+public class Solution {
+
+	public void findCombination(int n, int m) {
+	    List<Integer> res = new LinkedList<>();
+        helper(m, n, res);
+	}
+
+	private void helper(int target, int n, List<Integer> res) {
+	   if (target < 0 || n < 0) {
+           return;
+       }
+
+       if (target == 0) {
+           print(res);
+           return;
+       }
+
+       res.add(n);
+       helper(target - n, n - 1, res);
+       res.remove(res.size() - 1);
+       helper(target, n - 1, res);
+	}
+
+	private void print(List<Integer> res) {
+	    for (int e : res)
+	    		System.out.print(e + " ");
+	    System.out.println();
+	}
+}
