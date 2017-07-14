@@ -1,0 +1,39 @@
+题目：一个台阶总共有n 级，如果一次可以跳1 级，也可以跳2 级。
+求总共有多少总跳法，并分析算法的时间复杂度。
+这道题最近经常出现，包括MicroStrategy 等比较重视算法的公司
+都曾先后选用过个这道题作为面试题或者笔试题。
+ANSWER
+f(n)=f(n-1)+f(n-2), f(1)=1, f(2)=2, let f(0) = 1, then f(n) = fibo(n-1);
+
+leetcode 070
+
+// method 1
+// 14.14%
+// http://www.2cto.com/kf/201509/442774.html
+// 利用离散时间信号系统令输入响应的模型来求解斐波那契问题 f(n) = f(n-1) + f(n-2)
+public class Solution {
+    public int climbStairs(int n) {
+    	double sqrtNum = Math.sqrt(5);
+    	return (int)(((Math.pow((1 + sqrtNum) / 2, n+1) - Math.pow((1 - sqrtNum) / 2, n+1)) / sqrtNum));
+    }
+}
+
+// method 2
+// 14.14%
+// dp
+public class Solution {
+    public int climbStairs(int n) {
+    	if (n <= 0) return 0;
+    	if (n == 1) return 1;
+    	
+    	int[] dp = new int[n+1];
+    	dp[0] = 0;
+    	dp[1] = 1;
+    	dp[2] = 2;
+    	
+    	for (int i = 3; i <= n; i++) {
+    		dp[i] = dp[i-1] + dp[i-2];
+    	}
+    	return dp[n];
+    }
+}
