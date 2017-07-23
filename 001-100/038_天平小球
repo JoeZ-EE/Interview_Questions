@@ -6,3 +6,18 @@
 ANSWER:
 x=1, y=3: if a=b, c is the lighter, else the lighter is the lighter...
 do this recursively. so y=3^x;
+
+
+2.有一个很大很大的输入流，大到没有存储器可以将其存储下来，
+而且只输入一次，如何从这个输入流中随机取得m 个记录。
+ANSWER
+
+That is, keep total number count N. If N<=m, just keep it.
+For N>m, generate a random number R=rand(N) in [0, N), replace a[R] with new number if R falls in [0, m).
+
+
+3.大量的URL 字符串，如何从中去除重复的，优化时间空间复杂度
+ANSWER
+1. Use hash map if there is enough memory.
+2. If there is no enough memory, use hash to put urls to bins, and do it until we can fit the bin into memory.
+
