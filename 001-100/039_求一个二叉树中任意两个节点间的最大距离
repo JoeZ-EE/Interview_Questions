@@ -1,0 +1,28 @@
+求一个二叉树中任意两个节点间的最大距离，
+两个节点的距离的定义是这两个节点间边的个数，
+比如某个孩子节点和父节点间的距离是1，和相邻兄弟节点间的距离是2，优化时间空间复
+杂度。
+leetcode 124
+
+
+ANSWER:
+
+public class Solution {
+
+	public int maxDis = Integer.MIN_VALUE;
+	
+	public int maxPath(TreeNode root) {
+		maxDis = Integer.MIN_VALUE;
+		maxPathDown(root);
+		return maxDis;
+	}
+	
+	private int maxPathDown(TreeNode node) {
+		if (node == null || (node.left == null && node.right == null)) 
+			return 0;
+		int left = Math.max(0, maxPathDown(node.left));
+		int right = Math.max(0, maxPathDown(node.right));
+		maxDis = Math.max(maxDis, left + right + 2);
+		return Math.max(left, right) + 1;
+	}
+}
