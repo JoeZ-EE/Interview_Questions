@@ -1,0 +1,8 @@
+百度面试：
+1.用天平（只能比较，不能称重）从一堆小球中找出其中唯一一个较轻的，使用x 次天平，
+最多可以从y 个小球中找出较轻的那个，求y 与x 的关系式。
+
+
+ANSWER:
+x=1, y=3: if a=b, c is the lighter, else the lighter is the lighter...
+do this recursively. so y=3^x;
