@@ -1,0 +1,9 @@
+有两个序列a,b，大小都为n,序列元素的值任意整数，无序；
+要求：通过交换a,b 中的元素，使[序列a 元素的和]与[序列b 元素的和]之间的差最小。
+例如:
+var a=[100,99,98,1,2, 3];
+var b=[1, 2, 3, 4,5,40];
+ANSWER
+If only one swap can be taken, it is a O(n^2) searching problem, which can be reduced to O(nlogn) by sorting the arrays and doing binary search.
+If any times of swaps can be performed, this is a double combinatorial problem.
+In the book <<beauty of codes>>, a similar problem splits an array to halves as even as possible. It is possible to take binary search, when SUM of the array is not too high. Else this is a quite time consuming brute force problem. I cannot figure out a reasonable solution.
