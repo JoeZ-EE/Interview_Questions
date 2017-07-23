@@ -9,20 +9,19 @@ ANSWER:
 
 public class Solution {
 
-	public int maxDis = Integer.MIN_VALUE;
-	
-	public int maxPath(TreeNode root) {
-		maxDis = Integer.MIN_VALUE;
-		maxPathDown(root);
-		return maxDis;
-	}
-	
-	private int maxPathDown(TreeNode node) {
-		if (node == null || (node.left == null && node.right == null)) 
-			return 0;
-		int left = Math.max(0, maxPathDown(node.left));
-		int right = Math.max(0, maxPathDown(node.right));
-		maxDis = Math.max(maxDis, left + right + 2);
-		return Math.max(left, right) + 1;
-	}
+	int maxValue;
+    
+    public int maxPath(TreeNode root) {
+        maxValue = Integer.MIN_VALUE;
+        maxPathDown(root);
+        return maxValue;
+    }
+    
+    private int maxPathDown(TreeNode node) {
+        if (node == null) return 0;
+        int left = Math.max(0, maxPathDown(node.left));
+        int right = Math.max(0, maxPathDown(node.right));
+        maxValue = Math.max(maxValue, left + right + 1) - 1;
+        return Math.max(left, right) + 1;
+    }
 }
