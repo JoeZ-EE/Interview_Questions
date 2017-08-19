@@ -17,18 +17,23 @@
 Answer:
 
 public class Solution {
-    public boolean test(int[] nums, int start, int end) {
-        return helper(nums, start, end);
+    public boolean test(int[] nums, int begin, int end) {
+        return helper(nums, begin, end);
     }
 
-    private boolean helper(int[] nums, int start, int end) {
-        if (start == end) return true;
-        int i = end - 1;
-        while (nums[end] < nums[i] && i >= start) i--;
-        if (!helper(nums, i + 1, end - 1))
-            return false;
-        int k = i;
-        while (nums[end] > nums[i] && i >= start) i--;
-        return helper(nums, start, k);
+    private boolean helper(int[] nums, int begin, int end) {
+
+        if(begin == end) return true;  
+        int mid = end - 1;  
+        int root = a[end];  
+        while(a[mid] > root && mid >= begin)  
+            mid--;  
+            
+        for(int i = begin; i <= mid; i++)  
+            if(a[i] > root)  
+                return false;  
+        bool left = check(a, begin, mid);  
+        bool right = check(a, mid+1, end-1);  
+        return left && right;  
     }
 }
