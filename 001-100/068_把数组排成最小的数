@@ -1,0 +1,25 @@
+题目：输入一个正整数数组，将它们连接起来排成一个数，输出能排出的所有数字中最小的
+一个。
+例如输入数组{32, 321}，则输出这两个能排成的最小数字32132。
+请给出解决问题的算法，并证明该算法。
+分析：这是09 年6 月份百度的一道面试题，
+从这道题我们可以看出百度对应聘者在算法方面有很高的要求。
+ANSWER:
+Actually this problem has little to do with algorithm...
+The concern is, you must figure out how to arrange to achieve a smaller figure.
+The answer is, if ab < ba, then a < b, and this is a total order.
+
+String smallestDigit(int a[]) {
+  Integer aux[] = new Integer[a.length];
+  for (int i=0; i<a.length; a++) aux[i] = a[i];
+  Arrays.sort(aux, new Comparator<Integer>(){
+    int compareTo(Integer i1, Integer i2) {
+      return (“”+i1+i2).compare(“”+i2+i1);
+    }
+  });
+  StringBuffer sb = new StringBuffer();
+  for (int i=0; i<aux.length, i++) {
+    sb.append(aux[i]);
+  }
+  return sb.toString();
+}
