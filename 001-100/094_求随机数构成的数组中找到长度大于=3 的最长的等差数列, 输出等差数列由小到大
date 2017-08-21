@@ -1,0 +1,49 @@
+求随机数构成的数组中找到长度大于=3 的最长的等差数列, 输出等差数列由小到大
+
+
+@SuppressWarnings("unchecked")  
+private static void getArithmeticProgression(int[] array) {  
+    /* 排序 */  
+    Arrays.sort(array);  
+    /* 存放最大等差数列的容器 */  
+    ArrayList<Integer> maxList = new ArrayList<Integer>();  
+    /* 存放等差数列的临时容器 */  
+    ArrayList<Integer> tmpList = new ArrayList<Integer>();  
+    int len = array.length;  
+    for (int i = 0; i < len; i++) {  
+        for (int j = i + 1; j < len; j++) {  
+            /* 清空list */  
+            tmpList.clear();  
+            /* 添加数列的第一个元素 */  
+            tmpList.add(i);  
+            /* 添加数列的第二个元素*/  
+            tmpList.add(j);  
+            /* 当前数列的元素个数 */  
+            int num = 2;  
+            /* 等差 */  
+            int progression = array[j] - array[i];  
+            /* 当前元素位置 */  
+            int current = j;  
+            /* 下一个元素位置 */  
+            int next = j + 1;  
+            /* 从current开始遍历*/  
+            while (next < len) {  
+                /*下一个元素和当前元素是等差数列*/  
+                if (array[next] - array[current] == progression) {  
+                    tmpList.add(next);  
+                    current = next;  
+                    num++;  
+                }  
+                next++;  
+            }  
+            /* 设定最大等差数列*/  
+            if (num >= maxList.size()) {  
+                maxList = (ArrayList<Integer>)tmpList.clone();  
+            }  
+        }  
+    }  
+    /* 输出结果 */  
+    for (Integer o : maxList) {  
+        System.out.println(array[o]);  
+    }  
+}  
