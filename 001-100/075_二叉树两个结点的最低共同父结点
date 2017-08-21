@@ -1,2 +1,13 @@
 leetcode 235
 leetcode 236
+
+
+TreeNode* getLCA(TreeNode* root, TreeNode* X, TreeNode *Y) {
+  if (root == NULL) return NULL;
+  if (X == root || Y == root) return root;
+  TreeNode * left = getLCA(root->m_pLeft, X, Y);
+  TreeNode * right = getLCA(root->m_pRight, X, Y);
+  if (left == NULL) return right;
+  else if (right == NULL) return left;
+  else return root;
+}
